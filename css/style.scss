@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@import 'sass/_colors';
+@import 'sass/_layout';
+@import 'sass/_spacing';
+@import 'sass/_typography';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  position: relative;
+
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+
+  color: white;
+
+  background-color: $black-dark;
+
+  &::-webkit-scrollbar {
+    padding-right: 2px;
+    width: 8px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: $black-light;
+  }
+}
+
+.border {
+  border: 1px solid red;
+}
+
+.hidden {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}
+
+svg, img {
+  width: 100%;
+  //height: auto;
+}
+
+@import 'sass/_menu';
+@import 'sass/_buttons';
+@import 'sass/_icons';

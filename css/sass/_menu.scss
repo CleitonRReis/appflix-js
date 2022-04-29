@@ -1,0 +1,54 @@
+header {
+  background-color: rgba(6, 9, 15, .4);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $black-light;
+  z-index: 999;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  padding: 8px 24px;
+  color: $primary-normal;
+  transition: ease .3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.logo {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 40px;
+  max-width: 64px;
+  min-width: 48px;
+  font-weight: bold;
+}
+
+.img-profile {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+input {
+  display: block;
+
+  padding: 10px 12px;
+  border: 0;
+  background-color: $black-light;
+  width: 300px;
+  border-radius: 4px;
+  color: $white-light;
+  font-size: 15px;
+  // outline: none;
+  outline-color: $primary-normal;
+}

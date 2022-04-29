@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Appflix</title>
+</head>
+
+<body>
+  <!--================= Header =================-->
+  <header class="header">
+    <div class="logo"><a href="./index.html">AppFlix</a></div>
+
+    <div>
+      <div class="search">
+        <form data-js="film-form">
+          <input data-js="search" type="search" name="search" placeholder="Search film..." />
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <a href="#">
+        <img class="img-profile" src="./img/profile/cr.jpeg" alt="">
+      </a>
+    </div>
+
+  </header>
+
+  <!--================= Main =================-->
+  <section>
+    <div class="main-film" data-js="main-film">
+      <div class="banner-film">
+        <a href="#">
+          <img class="poster" data-js="img-film" src="" alt="" />
+          <h4 class="title" data-js="title"></h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="featured-movie">
+      <div class="vertical">
+        <div class="horizontal">
+          <div class="title">The Batman</div>
+
+          <div class="info-film">
+            <div class="vote-average">
+              7.9 vote average
+            </div>
+
+            <span class="span">●</span>
+
+            <div class="year">
+              2022
+            </div>
+          </div>
+
+          <div class="resume">
+            In his second year of fighting crime, Batman uncovers corruption in Gotham City
+            that connects to his own family while facing a serial killer known as the Riddler.
+          </div>
+
+          <div class="btn">
+            <a href="#" class="watch-film">► Watch</a>
+            <a href="#" class="mylist-film">+ My Lyst</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--================= Main Films =================-->
+
+  <section>
+    <div class="banner">
+      <div data-js="models">
+
+        <img src="" alt="banner of a movie" />
+
+        <div class="banner-img grid-6 models">
+          <div class="star">
+            <img class="star" src="./svg/icon-star.svg" alt="">
+          </div>
+
+          <h3 class="title-banner">
+            <a data-js="title-banner" href="./pages/popular-films/index.html">Most popular films of the day</a>
+          </h3>
+
+          <p class="mt-2">
+            The standard chunk of Lorem Ipsum used since the 1500s is
+            reproduced below for those interested.
+            Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum."
+          </p>
+          <img class="banner-film-most-popular" src="" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--================= Main Films =================-->
+
+  <section class="container">
+    <div data-js="film-area"></div>
+  </section>
+
+  <!--================= Films Week =================-->
+
+  <section class="container-test">
+    <div>
+      <img class="star" src="./svg/icon-star.svg" alt="">
+    </div>
+
+    <h3 class="most-popular-h3">Most popular films of the Week</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing
+      elit. Ornare urna pharetra ut ac, pellentesque.
+    </p>
+
+    <div class="films container-week" data-js="films-week-dad">
+
+      <template data-js="films-week">
+        <div class="films-test thumb">
+          <img data-js="img-film-week" src="" alt="">
+
+          <div class="film-info-test">
+            <h6 class="color-gray" data-js="date-film"></h6>
+            <h4 class="title-film" data-js="title-film"></h4>
+
+            <p class="mt-1" data-js="description"></p>
+
+            <div class="my-3">
+              <a href="" class="link color-primary">Ler mais</a>
+            </div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </section>
+
+  <!--===============Footer=====================-->
+  <footer class="footer">
+    <div class="footer-data">
+      <p>2022 | Cleiton Reis</p>
+    </div>
+    <div class="footer-icons">
+      <a class="icons" href="https://github.com/CleitonRReis" target="_blank"><i
+          class="fa-brands fa-github-square"></i></a>
+      <a class="icons" href="https://www.linkedin.com/in/cjrreis/" target="_blank"><i
+          class="fa-brands fa-linkedin"></i></a>
+      <a class="icons" href="https://www.facebook.com/cleiton.tavares.3/" target="_blank"><i
+          class="fa-brands fa-facebook-square"></i></a>
+      <a class="icons" href="https://www.instagram.com/_rodriguesreis/" target="_blank"><i
+          class="fa-brands fa-instagram-square"></i></a>
+    </div>
+  </footer>
+
+  <!--===============Search Film=====================-->
+  <section class="search-movie-area" data-js="search-movie-area">
+    <div class="search-movie-container" data-js="search-movie-container">
+
+
+      <template data-js="films-searched">
+        <div class="data-movie" data-js="data-movie">
+    
+          <img data-js="searched-img-movie" src="" alt="">
+    
+          <div class="searched-movie-data">
+    
+            <h6 data-js="searched-name-movie"></h6>
+            <p data-js="searched-descrition-movie"></p>
+    
+          </div>
+        </div>
+      </template>
+
+
+    </div>
+  </section>
+
+
+
+  <script src="https://kit.fontawesome.com/8c7b8af716.js" crossorigin="anonymous"></script>
+  <script src="./index.js"></script>
+</body>
+
+</html>
