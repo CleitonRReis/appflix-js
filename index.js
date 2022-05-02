@@ -13,6 +13,7 @@ const endPointMostPopularWeek = `https://api.themoviedb.org/3/trending/movie/wee
 const imgPoster = (size, pathImg) => `https://image.tmdb.org/t/p/${size}${pathImg}`;
 const endPointDatailsFilm = id => `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
 const searchFilm = nameFilm => `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${nameFilm}`;
+const truncate = (str, limit) => str.length > limit ? `${str.substring(0, limit)}...` : str;
 
 const handleApi = async () => {
   for (let i = 0; i < 1; i++) {
@@ -44,10 +45,6 @@ const handleApi = async () => {
 };
 
 handleApi();
-
-const truncate = (str, limit) => {
-  return str.length > limit ? `${str.substring(0, limit)}...` : str;
-};
 
 const getFilmsWeek = async () => {
   const response = await fetch(endPointMostPopularWeek);
@@ -87,63 +84,39 @@ const getFilmsWeek = async () => {
 
 getFilmsWeek();
 
-filterInput.addEventListener('input', async e => {
+const showMovieList = async e => {
   e.preventDefault();
+
   const inputValue = e.target.value.trim().toLowerCase();
 
   if (inputValue) {
     searchedMovie.classList.add('active');
 
-    const searchedMovieContainer = document.querySelector('[data-js="search-movie-container"]');
-
     try {
       const response = await fetch(searchFilm(inputValue));
-      const responseData = await response.json();
-      const arrayFilms = responseData.results;
-      const filmSearchedTemplate = document.querySelector('[data-js="films-searched"]').content;
+      const { results } = await response.json();
 
-      arrayFilms.map(({ poster_path, title, overview }) => {
-        return {
-          src: imgPoster('w200', poster_path),
-          title,
-          description: truncate(overview, 162)
-        }
-      }).forEach(result => {
-        const clone = filmSearchedTemplate.cloneNode(true);
-        const [imgMovie, title, description] = [
-          '[data-js="searched-img-movie"]',
-          '[data-js="searched-name-movie"]',
-          '[data-js="searched-descrition-movie"]'
-        ].map(selector => clone.querySelector(selector));
+      const ul = document.querySelector('[data-js="ul"]');
 
-        if (result.src.includes('null')) {
-          imgMovie.src = 'img/take.png';
-        } else {
-          imgMovie.src = result.src;
-        };
+      const lis = results.map(({ poster_path, title, overview }) => {
+        return `<div class="data-movie" data-js="data-movie">
+                  <img data-js="searched-img-movie" src=${`https://image.tmdb.org/t/p/${imgPoster('w200', poster_path)}`} alt="">
+              
+                  <div class="searched-movie-data">
+                    <li><h6>${title}<h6></li>
+                    <li><p>${truncate(overview, 162)}<p></li>
+                  </div>
+                </div>`
+      }).join('');
 
-        title.innerHTML = result.title;
-        description.innerHTML = result.description;
-
-      searchedMovieContainer.append(clone);
-
-      Array.from(searchedMovieContainer.children)
-        .filter(movie => !movie.textContent.toLowerCase().includes(inputValue))
-        .forEach(movie => {
-          movie.classList.add('invisible')
-        });
-
-      Array.from(searchedMovieContainer.children)
-        .filter(movie => movie.textContent.toLowerCase().includes(inputValue))
-        .forEach(movie => {
-          movie.classList.remove('invisible')
-        });
-    });
+      ul.innerHTML = lis;
     } catch (error) {
       console.error(error);
     };
   };
-});
+};
+
+filterInput.addEventListener('input', showMovieList);
 
 searchedMovie.addEventListener('click', e => {
   if (e.target.className === 'search-movie-area active') {

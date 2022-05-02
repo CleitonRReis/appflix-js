@@ -473,7 +473,7 @@ input:focus {
 }
 
 .data-movie {
-  display: inherit;
+  display: flex;
   width: 100%;
   padding: 24px;
   align-items: center;
@@ -484,7 +484,6 @@ input:focus {
   background-color: $black-dark;
   cursor: pointer;
   transition: ease .3s;
-  
 
   &:hover {
     background-color: $black-light;
@@ -495,6 +494,10 @@ input:focus {
     height: 90px;
     border-radius: 50%;
     margin-right: 24px;
+  }
+
+  li {
+    list-style: none;
   }
 }
 
