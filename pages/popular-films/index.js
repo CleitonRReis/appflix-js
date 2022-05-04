@@ -1,47 +1,49 @@
 const APIKEY = '3942be052658547c45144d8ba9fb9009';
-const endPointDatailsFilm = id => `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
 const endPointMostPopular = `https://api.themoviedb.org/3/trending/movie/day?api_key=${APIKEY}`;
 
-const filmDetails = document.querySelector('[data-js="container-most-popular"]');
-const filmWindowArea = document.querySelector('[data-js="filmWindowArea"]');
+const yearOfFilm = document.querySelector('[data-js="year"]');
 const nameFilm = document.querySelector('[data-js="nameFilm"]');
 const filmBigImg = document.querySelector('[data-js="filmBigImg"]');
 const voteAverage = document.querySelector('[data-js="vote-average"]');
-const yearOfFilm = document.querySelector('[data-js="year"]');
+const filmWindowArea = document.querySelector('[data-js="filmWindowArea"]');
 const descriptionOfFilm = document.querySelector('[data-js="descriptionFilm"]');
+const filmDetails = document.querySelector('[data-js="container-most-popular"]');
 
 const imgPoster = pathImg => `https://image.tmdb.org/t/p/original${pathImg}`;
-
+const endPointDatailsFilm = id => `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
 
 const getFilmUrl = async () => {
-  const setKey = document.querySelector('.films-popular-img');
-  const containerMostPopular = document.querySelector('[data-js="container-most-popular"]');
-  const filmsPopular = document.querySelector('[data-js="films-popular"]');
-
   try {
     const response = await fetch(endPointMostPopular);
+
+    const containerMostPopular = document.querySelector('[data-js="container-most-popular"]');
+    const filmsPopular = document.querySelector('[data-js="films-test"]').content;
 
     if (!response.ok) {
       throw new Error('Sorry! Could not get movie data. Try later!');
     };
 
-    const responseData = await response.json();
-    const arrayFilms = responseData.results;
+    const { results } = await response.json();
 
-    arrayFilms.map(movie => {
+    results.map(({ id, poster_path }) => {
+      return {
+        id,
+        src: imgPoster(poster_path)
+      }
+    }).forEach(({ src, id }) => {
       const clone = filmsPopular.cloneNode(true);
-      const { poster_path, id } = movie;
+      const [ img ] = [ '[data-js="img-movie"]' ]
+      .map(selector => clone.querySelector(selector));
 
-      filmsPopular.querySelector('img').src = imgPoster(poster_path);
-
+      img.src = src;
+      
+      img.setAttribute('data-key', id);
+      
       containerMostPopular.append(clone);
-      setKey.setAttribute('data-key', id);
     });
   } catch (error) {
     console.error(error);
   };
-
-  containerMostPopular.removeChild(containerMostPopular.childNodes[3]);
 };
 
 getFilmUrl();
