@@ -32,8 +32,8 @@ const handleApi = async () => {
       }
 
       const responseData = await response.json();
-      const { poster_path, backdrop_path } = responseData.results[i]
-      // console.log(backdrop_path);
+      const { poster_path } = responseData.results[i];
+
       const imgPoster = `https://image.tmdb.org/t/p/w300${poster_path}`;
 
       if (poster_path === null) {
@@ -56,9 +56,7 @@ const getFilmsWeek = async () => {
   const { results } = await response.json();
 
   const filmArea = document.querySelector('[data-js="films-week-dad"]');
-  const filmsWeekTemplate = document.querySelector(
-    '[data-js="films-week"]'
-  ).content;
+  const filmsWeekTemplate = document.querySelector('[data-js="films-week"]').content;
 
   results
     .map(({ backdrop_path, release_date, title, overview }) => {
@@ -71,7 +69,7 @@ const getFilmsWeek = async () => {
     })
     .forEach(result => {
       const clone = filmsWeekTemplate.cloneNode(true);
-      const [ thumb, date, title, description ] = [
+      const [thumb, date, title, description] = [
         '[data-js="img-film-week"]',
         '[data-js="date-film"]',
         '[data-js="title-film"]',
@@ -121,11 +119,16 @@ const showMovieList = async e => {
   };
 };
 
-
 const movieSearch = async e => {
   e.preventDefault();
 
   const inputValue = e.target.search.value;
+
+  const containerMovieSearch = document.querySelector('.container-movie-search');
+  containerMovieSearch.classList.add('active-search');
+  
+  const containerSubmit = document.querySelector('[data-js="container-movie-search"]');
+  const templateMoviSearch = document.querySelector('[data-js="template-movie-search"]').content;
 
   resultTitle.textContent = `'${inputValue}'`;
 
@@ -135,14 +138,43 @@ const movieSearch = async e => {
     if (!response.ok) {
       throw new Error('Sorry! Could not get movie data. Try later!');
     }
-    
+
     const { results } = await response.json();
 
-    
+    results.map(movie => {
+      return {
+        src: imgPoster('original', movie.backdrop_path),
+        poster: imgPoster('original', movie.poster_path),
+        year: new Date(movie.release_date).getFullYear(),
+        title: truncate(movie.title, 25),
+        description: truncate(movie.overview, 50)
+      };
+    }).forEach(result => {
+      const clone = templateMoviSearch.cloneNode(true);
+      const [thumb, year, title, description] = [
+        '[data-js="img-film-search"]',
+        '[data-js="date-film-search"]',
+        '[data-js="title-film-search"]',
+        '[data-js="description-movie-search"]'
+      ].map(selector => clone.querySelector(selector))
 
-    // console.log(results.length);
-    resultsOfResults.innerHTML = results.length > 1 ? `${results.length} resultado(s):` : `${results.length} resultado:`;
-    console.log(results);
+      if (result.poster.includes(null) && result.src.includes(null)) {
+        thumb.src = './img/take.png';
+      } else if (result.poster.includes(null)) {
+        thumb.src = result.src
+      } else {
+        thumb.src = result.poster;
+      }
+
+      !isNaN(result.year) ? year.innerHTML = result.year : year.innerHTML = '--';
+      title.innerHTML = result.title;
+      description.innerHTML = result.description;
+
+      containerSubmit.append(clone);
+    });
+
+    resultsOfResults.innerHTML = results.length > 1 ? `${results.length} resultados:` : `${results.length} resultado:`;
+
   } catch (error) {
     console.log(error);
   };

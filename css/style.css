@@ -535,6 +535,11 @@ h1 {
   background-color: #06090F;
   width: 100%;
   height: 100%;
+  display: none;
+}
+
+.container-movie-search.active-search {
+  display: inline-block;
 }
 
 .div-movie-search {
@@ -572,8 +577,8 @@ h1 {
 }
 
 .thumb:hover img {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .film-info-test {
