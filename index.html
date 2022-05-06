@@ -121,7 +121,7 @@
       elit. Ornare urna pharetra ut ac, pellentesque.
     </p>
 
-    <div class="films container-week" data-js="films-week-dad">
+    <div class="container-week" data-js="films-week-dad">
 
       <template data-js="films-week">
         <div class="films-test thumb">
@@ -160,14 +160,84 @@
     </div>
   </footer>
 
-  <!--===============Search Film=====================-->
+  <!--===============Search Film Input=====================-->
   <section class="search-movie-area" data-js="search-movie-area">
     <div class="search-movie-container" data-js="search-movie-container">
       <ul data-js="ul"></ul>
     </div>
   </section>
 
+  <!--===============Search Film Submit=====================-->
+  <section class="container-movie-search">
 
+    <!-- <header>
+      <div class="logo"><a href="../../index.html">AppFlix</a></div>
+
+      <div>
+        <div class="search">
+          <form>
+            <input type="text" name="search" placeholder="Buscar filme" />
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <a href="#">
+          <img class="img-profile" src="../../img/profile/cr.jpeg" alt="">
+        </a>
+      </div>
+    </header> -->
+
+    <div class="div-movie-search">
+      <h6 class="result" data-js="results"></h6>
+      <h4 class="result-title" data-js="result-title"></h4>
+
+      <h3 class="search">Search</h3>
+
+      <div class="container-search">
+
+        <template class="div-template-movie" data-js="area-movie-search">
+
+          <div class="films-test thumb">
+
+            <img data-js="img-film-week" src="https://image.tmdb.org/t/p/original/9IDJpHROaC0S1ZlIxrvzOcOX5yC.jpg" alt="">
+  
+            <div class="film-info-test">
+              <h6 class="color-gray" data-js="date-film">2022</h6>
+              <h4 class="title-film" data-js="title-film">THE BAD GUYS</h4>
+  
+              <p class="mt-1" data-js="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Ornare urna pharetra ut ac, pellentesque.
+              </p>
+  
+              <div class="my-3">
+                <a href="" class="link color-primary">Ler mais</a>
+              </div>
+            </div>
+          </div>
+          
+        </template> <!-- template -->
+
+
+      </div>
+
+      <!-- <footer class="footer">
+        <div class="footer-data">
+          <p>2022 | Cleiton Reis</p>
+        </div>
+        <div class="footer-icons">
+          <a class="icons" href="https://github.com/CleitonRReis" target="_blank"><i
+              class="fa-brands fa-github-square"></i></a>
+          <a class="icons" href="https://www.linkedin.com/in/cjrreis/" target="_blank"><i
+              class="fa-brands fa-linkedin"></i></a>
+          <a class="icons" href="https://www.facebook.com/cleiton.tavares.3/" target="_blank"><i
+              class="fa-brands fa-facebook-square"></i></a>
+          <a class="icons" href="https://www.instagram.com/_rodriguesreis/" target="_blank"><i
+              class="fa-brands fa-instagram-square"></i></a>
+        </div>
+      </footer> -->
+  </section>
 
   <script src="https://kit.fontawesome.com/8c7b8af716.js" crossorigin="anonymous"></script>
   <script src="./index.js"></script>

@@ -1,7 +1,11 @@
+// console.log(resultsOfResults);
 const filterInput = document.querySelector('[data-js="search"]');
+const formSearch = document.querySelector('[data-js="film-form"]');
 const yearOfFilm = document.querySelector('[data-js="date-film"]');
 const titleFilm = document.querySelector('[data-js="title-film"]');
 const searchFilmInput = document.querySelector('[data-js="search"]');
+const resultsOfResults = document.querySelector('[data-js="results"]');
+const resultTitle = document.querySelector('[data-js="result-title"]');
 const imgFilmWeek = document.querySelector('[data-js="img-film-week"]');
 const descriptionFilm = document.querySelector('[data-js="description"]');
 const searchedMovie = document.querySelector('[data-js="search-movie-area"]');
@@ -24,11 +28,12 @@ const handleApi = async () => {
       const response = await fetch(endPointMostPopularDay);
 
       if (!response.ok) {
-        throw new Error('Desculpe! Não foi possíve obter os dados do filme. Tente novamente mais tarde!');
+        throw new Error('Sorry! Could not get movie data. Try later!');
       }
 
       const responseData = await response.json();
-      const { poster_path } = responseData.results[i]
+      const { poster_path, backdrop_path } = responseData.results[i]
+      // console.log(backdrop_path);
       const imgPoster = `https://image.tmdb.org/t/p/w300${poster_path}`;
 
       if (poster_path === null) {
@@ -116,10 +121,39 @@ const showMovieList = async e => {
   };
 };
 
-filterInput.addEventListener('input', showMovieList);
+
+const movieSearch = async e => {
+  e.preventDefault();
+
+  const inputValue = e.target.search.value;
+
+  resultTitle.textContent = `'${inputValue}'`;
+
+  try {
+    const response = await fetch(searchFilm(inputValue));
+
+    if (!response.ok) {
+      throw new Error('Sorry! Could not get movie data. Try later!');
+    }
+    
+    const { results } = await response.json();
+
+    
+
+    // console.log(results.length);
+    resultsOfResults.innerHTML = results.length > 1 ? `${results.length} resultado(s):` : `${results.length} resultado:`;
+    console.log(results);
+  } catch (error) {
+    console.log(error);
+  };
+};
+
 
 searchedMovie.addEventListener('click', e => {
   if (e.target.className === 'search-movie-area active') {
     searchedMovie.classList.remove('active');
   };
 });
+
+formSearch.addEventListener('submit', movieSearch);
+filterInput.addEventListener('input', showMovieList);

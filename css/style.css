@@ -505,37 +505,45 @@ h1 {
   padding: 0px 12px;
 }
 
-.container-week {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 128px 12px;
-  overflow: hidden;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin-top: -100px;
-}
-
-.container-week::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-@media screen and (max-width: 960px) {
-  .container-week {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    padding: 96px 16px;
-  }
-}
-
 .title-film {
   font-size: 20px;
 }
 
-.container-week {
+.result, .result-title {
+  text-align: center;
+  font-weight: 500;
+}
+
+.result {
+  color: #1B69D2;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.result-title {
+  font-size: 44px;
+}
+
+.search {
+  font-weight: 500;
+}
+
+.container-movie-search {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  background-color: #06090F;
+  width: 100%;
+  height: 100%;
+}
+
+.div-movie-search {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.container-week, .container-search {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(355px, 1fr))[auto-fit];
