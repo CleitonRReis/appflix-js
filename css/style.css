@@ -524,8 +524,32 @@ h1 {
   font-size: 44px;
 }
 
+.search-back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fa-arrow-left {
+  color: #1B69D2;
+  width: 100%;
+  font-size: 50px;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  margin-left: -100px;
+}
+
+.fa-arrow-left:hover {
+  -webkit-transform: translate3d(-5px, 0, 0);
+          transform: translate3d(-5px, 0, 0);
+}
+
 .search {
   font-weight: 500;
+  margin-left: -50px;
 }
 
 .container-movie-search {
@@ -627,7 +651,7 @@ h1 {
   padding: 12px;
 }
 
-.fa-github-square, .fa-facebook-square, .fa-instagram-square, .fa-linkedin {
+.fa-square-chevron-left, .fa-github-square, .fa-facebook-square, .fa-instagram-square, .fa-linkedin {
   color: #1B69D2;
   font-size: 25px;
 }
