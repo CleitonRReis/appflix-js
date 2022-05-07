@@ -11,8 +11,6 @@ const descriptionFilm = document.querySelector('[data-js="description"]');
 const searchedMovie = document.querySelector('[data-js="search-movie-area"]');
 const searchMovieContainer = document.querySelector('[data-js="search-movie-container"]');
 
-// console.log(searchMovieContainer);
-
 const APIKEY = '3942be052658547c45144d8ba9fb9009';
 const endPointMostPopularDay = `https://api.themoviedb.org/3/trending/movie/day?api_key=${APIKEY}`;
 const endPointMostPopularWeek = `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`;
@@ -88,7 +86,16 @@ const getFilmsWeek = async () => {
     });
 };
 
-getFilmsWeek();
+const generateMovieTemplate = results => results.map(({ poster_path, title, overview }) => {
+  return `<div class="data-movie" data-js="data-movie">
+            <img data-js="searched-img-movie" src=${`https://image.tmdb.org/t/p/${imgPoster('w200', poster_path)}`} alt="">
+        
+            <div class="searched-movie-data">
+              <li><h6>${title}<h6></li>
+              <li><p>${truncate(overview, 162)}<p></li>
+            </div>
+          </div>`
+}).join('');
 
 const showMovieList = async e => {
   e.preventDefault();
@@ -101,19 +108,8 @@ const showMovieList = async e => {
     try {
       const response = await fetch(searchFilm(inputValue));
       const { results } = await response.json();
-
       const ul = document.querySelector('[data-js="ul"]');
-
-      const lis = results.map(({ poster_path, title, overview }) => {
-        return `<div class="data-movie" data-js="data-movie">
-                  <img data-js="searched-img-movie" src=${`https://image.tmdb.org/t/p/${imgPoster('w200', poster_path)}`} alt="">
-              
-                  <div class="searched-movie-data">
-                    <li><h6>${title}<h6></li>
-                    <li><p>${truncate(overview, 162)}<p></li>
-                  </div>
-                </div>`
-      }).join('');
+      const lis = generateMovieTemplate(results);
 
       ul.innerHTML = lis;
     } catch (error) {
@@ -125,18 +121,17 @@ const showMovieList = async e => {
 const movieSearch = async e => {
   e.preventDefault();
 
-  
   const inputValue = e.target.search.value;
 
   if (inputValue.length === 0) {
     return;
   };
-  
+
   const containerMovieSearch = document.querySelector('.container-movie-search');
   const containerSubmit = document.querySelector('[data-js="container-movie-search"]');
   const templateMoviSearch = document.querySelector('[data-js="template-movie-search"]').content;
-  
-  
+
+
   searchMovieContainer.classList.add('invisible');
   containerMovieSearch.classList.add('active-search');
 
@@ -151,13 +146,13 @@ const movieSearch = async e => {
 
     const { results } = await response.json();
 
-    results.map(movie => {
+    results.map(({ backdrop_path, poster_path, release_date, title, overview }) => {
       return {
-        src: imgPoster('original', movie.backdrop_path),
-        poster: imgPoster('original', movie.poster_path),
-        year: new Date(movie.release_date).getFullYear(),
-        title: truncate(movie.title, 25),
-        description: truncate(movie.overview, 50)
+        src: imgPoster('original', backdrop_path),
+        poster: imgPoster('original', poster_path),
+        year: new Date(release_date).getFullYear(),
+        title: truncate(title, 25),
+        description: truncate(overview, 50)
       };
     }).forEach(result => {
       const clone = templateMoviSearch.cloneNode(true);
@@ -184,7 +179,6 @@ const movieSearch = async e => {
     });
 
     resultsOfResults.innerHTML = results.length > 1 ? `${results.length} resultados:` : `${results.length} resultado:`;
-
   } catch (error) {
     console.log(error);
   };
@@ -192,12 +186,13 @@ const movieSearch = async e => {
   formSearch.reset();
 };
 
-
 searchedMovie.addEventListener('click', e => {
   if (e.target.className === 'search-movie-area active') {
     searchedMovie.classList.remove('active');
   };
 });
+
+getFilmsWeek();
 
 formSearch.addEventListener('submit', movieSearch);
 filterInput.addEventListener('input', showMovieList);
