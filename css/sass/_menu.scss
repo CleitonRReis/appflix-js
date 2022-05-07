@@ -27,8 +27,6 @@ a {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 40px;
-  max-width: 64px;
-  min-width: 48px;
   font-weight: bold;
 }
 
@@ -49,6 +47,5 @@ input {
   border-radius: 4px;
   color: $white-light;
   font-size: 15px;
-  // outline: none;
   outline-color: $primary-normal;
 }
