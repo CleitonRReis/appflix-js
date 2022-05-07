@@ -1,4 +1,4 @@
-// console.log(resultsOfResults);
+
 const filterInput = document.querySelector('[data-js="search"]');
 const formSearch = document.querySelector('[data-js="film-form"]');
 const yearOfFilm = document.querySelector('[data-js="date-film"]');
@@ -9,6 +9,9 @@ const resultTitle = document.querySelector('[data-js="result-title"]');
 const imgFilmWeek = document.querySelector('[data-js="img-film-week"]');
 const descriptionFilm = document.querySelector('[data-js="description"]');
 const searchedMovie = document.querySelector('[data-js="search-movie-area"]');
+const searchMovieContainer = document.querySelector('[data-js="search-movie-container"]');
+
+// console.log(searchMovieContainer);
 
 const APIKEY = '3942be052658547c45144d8ba9fb9009';
 const endPointMostPopularDay = `https://api.themoviedb.org/3/trending/movie/day?api_key=${APIKEY}`;
@@ -122,13 +125,16 @@ const showMovieList = async e => {
 const movieSearch = async e => {
   e.preventDefault();
 
-  const inputValue = e.target.search.value;
-
-  const containerMovieSearch = document.querySelector('.container-movie-search');
-  containerMovieSearch.classList.add('active-search');
   
+  const inputValue = e.target.search.value;
+  
+  const containerMovieSearch = document.querySelector('.container-movie-search');
   const containerSubmit = document.querySelector('[data-js="container-movie-search"]');
   const templateMoviSearch = document.querySelector('[data-js="template-movie-search"]').content;
+  
+  
+  searchMovieContainer.classList.add('invisible');
+  containerMovieSearch.classList.add('active-search');
 
   resultTitle.textContent = `'${inputValue}'`;
 
@@ -178,6 +184,8 @@ const movieSearch = async e => {
   } catch (error) {
     console.log(error);
   };
+
+  formSearch.reset();
 };
 
 
