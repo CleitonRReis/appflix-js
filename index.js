@@ -127,6 +127,10 @@ const movieSearch = async e => {
 
   
   const inputValue = e.target.search.value;
+
+  if (inputValue.length === 0) {
+    return;
+  };
   
   const containerMovieSearch = document.querySelector('.container-movie-search');
   const containerSubmit = document.querySelector('[data-js="container-movie-search"]');
